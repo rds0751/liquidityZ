@@ -34,8 +34,8 @@ const row = [
     "id": 1,
     "Pool": "/images/Tether.png",
     "PoolTo": "/images/XDC.svg",
-    "Composition": "XDC",
-    "CompositionTo": "USDC",
+    "Composition": "SOL-USDC",
+    "CompositionTo": "",
     "PoolValue": "$442,298",
     "Volume": "$89,745",
     "TokensTo": "42,120",
@@ -46,8 +46,8 @@ const row = [
     "id": 2,
     "Pool": "/images/Tether.png",
     "PoolTo": "/images/XDC.svg",
-    "Composition": "XDC",
-    "CompositionTo": "USDC",
+    "Composition": "SOL-USDC",
+    "CompositionTo": "",
     "PoolValue": "$442,298",
     "Volume": "$89,745",
     "TokensTo": "42,120",
@@ -57,8 +57,8 @@ const row = [
     "id": 3,
     "Pool": "/images/Tether.png",
     "PoolTo": "/images/XDC.svg",
-    "Composition": "XDC",
-    "CompositionTo": "USDC",
+    "Composition": "SOL-USDC",
+    "CompositionTo": "",
     "PoolValue": "$442,298",
     "Volume": "$89,745",
     "TokensTo": "42,120",
@@ -71,9 +71,9 @@ const rows = [
   {
     "id": 1,
     "Img": "/images/XDC.svg",
-    "Name": "XDC",
+    "Name": "SOL-USDC",
     "Price": "$89,745",
-    "PriceChange": "USDC",
+    "PriceChange": "",
     "Volume": "$89,745",
     "TVL": "42,120",
 
@@ -81,18 +81,18 @@ const rows = [
   {
     "id": 2,
     "Img": "/images/XDC.svg",
-    "Name": "XDC",
+    "Name": "SOL-USDC",
     "Price": "$89,745",
-    "PriceChange": "USDC",
+    "PriceChange": "",
     "Volume": "$89,745",
     "TVL": "42,120",
   },
   {
     "id": 3,
     "Img": "/images/XDC.svg",
-    "Name": "XDC",
+    "Name": "SOL-USDC",
     "Price": "$89,745",
-    "PriceChange": "USDC",
+    "PriceChange": "",
     "Volume": "$89,745",
     "TVL": "42,120",
   }
@@ -103,16 +103,6 @@ function MarketCard() {
   return (
     <Box className="pool-box">
       <p className="header-market mb-4">Market</p>
-      <Box sx={{ width: '100%' }}>
-        <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-          <Grid item xs={6}>
-            <Item>1</Item>
-          </Grid>
-          <Grid item xs={6}>
-            <Item>2</Item>
-          </Grid>
-        </Grid>
-      </Box>
       <br />
       <br />
       <div className="top-token">

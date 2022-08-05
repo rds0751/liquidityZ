@@ -203,35 +203,28 @@ export default function App() {
     const amount = parseUnits("843711", 0).toBigInt();
     const promise = transferFromSolana(
       connection,
-      SOL_BRIDGE_ADDRESS,
-      SOL_TOKEN_BRIDGE_ADDRESS,
-      payerAddress,
-      fromAddress,
-      TEST_SOLANA_TOKEN,
-      amount,
+      'worm2ZoG2kUd4vFXhvjh93UUH596ayRfgQ2MgjNMTth',
+      'wormDTUJ6AWPNvk59vGQbDvGJmqbDTdgWgAqcLBCgUb',
+      '4MTwDKjWQZ5PgmpBGVJwg6Bckpsb66wY5p8sadgbceGk',
+      '98Wb4vTJB7CxoeEA2NfP93rPg4jizS9BktDG9mfvn5uF',
+      'A9mUU4qviSctJVPJdBJWkb28deg915LYJKrzQ19ji3FM',
+      '8437000000',
       tryNativeToUint8Array(targetAddress, CHAIN_ID_ETH),
-      2,
-      undefined,
-      undefined,
-      undefined,
-      parseUnits("0", 0).toBigInt() 
-    );
-    console.log(
-      connection,
-      SOL_BRIDGE_ADDRESS,
-      SOL_TOKEN_BRIDGE_ADDRESS,
-      payerAddress,
-      fromAddress,
-      TEST_SOLANA_TOKEN,
-      amount,
-      tryNativeToUint8Array(targetAddress, CHAIN_ID_ETH),
-      2,
-      undefined,
-      2,
-      undefined,
-      parseUnits("0", 0).toBigInt()
+      2
     );
     const transaction = await promise;
+    console.log(
+      connection,
+      'worm2ZoG2kUd4vFXhvjh93UUH596ayRfgQ2MgjNMTth',
+      'wormDTUJ6AWPNvk59vGQbDvGJmqbDTdgWgAqcLBCgUb',
+      '4MTwDKjWQZ5PgmpBGVJwg6Bckpsb66wY5p8sadgbceGk',
+      '98Wb4vTJB7CxoeEA2NfP93rPg4jizS9BktDG9mfvn5uF',
+      'A9mUU4qviSctJVPJdBJWkb28deg915LYJKrzQ19ji3FM',
+      '8437000000',
+      tryNativeToUint8Array(targetAddress, CHAIN_ID_ETH),
+      2,
+      transaction
+    );
     const txid = await signSendAndConfirm(solProvider, connection, transaction);
     // const { signature } = await solProvider.signAndSendTransaction(transaction);
     // await connection.getSignatureStatus(signature);
