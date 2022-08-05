@@ -100,8 +100,8 @@ export default function SideBar() {
         <div>
           <Toolbar>
             <img
-              style={{ width: "134px", height: "26px", marginLeft: "7px" }}
-              src="/images/Logo.svg"
+              style={{ width: "134px", height: "134px", marginLeft: "7px", marginTop: "31px" }}
+              src="https://imgur.com/lfWtixh.png"
             ></img>{" "}
           </Toolbar>
         </div>
@@ -109,11 +109,6 @@ export default function SideBar() {
           <ListItem
             className="list-item"
             button
-            // onClick={() => setAboutIcon}
-            // selected={selectedIndex === 1}
-
-            // onMouseOver={() => changeSourceForIcons("about")}
-            // onMouseOut={() => changeOriginalSourceForIcons("about")}
             component={Link}
             to="/about"
           >
@@ -162,42 +157,6 @@ export default function SideBar() {
               }
             >
               Bridge
-            </ListItemText>
-          </ListItem>
-
-          <ListItem className="list-item" button component={Link} to="/swap">
-            <ListItemIcon>
-              <img
-                style={{ paddingLeft: "10px" }}
-                src={
-                  currSection === "swap"
-                    ? "/images/swap2_white.svg"
-                    : "/images/swap2_coloured.svg"
-                }
-              ></img>
-            </ListItemIcon>
-            <ListItemText
-              className={currSection === "swap" ? "selected-text" : "list-text"}
-            >
-              Swap
-            </ListItemText>
-          </ListItem>
-
-          <ListItem className="list-item" button component={Link} to="/pool">
-            <ListItemIcon>
-              <img
-                style={{ paddingLeft: "10px" }}
-                src={
-                  currSection === "pool"
-                    ? "/images/earn2_white.svg"
-                    : "/images/earn2_coloured.svg"
-                }
-              ></img>
-            </ListItemIcon>
-            <ListItemText
-              className={currSection === "pool" ? "selected-text" : "list-text"}
-            >
-              Pool
             </ListItemText>
           </ListItem>
 
@@ -256,8 +215,8 @@ export default function SideBar() {
           <div style={{ marginLeft: "14px" }}>
             {
               <p className="powered">
-                Powered by <img src="/images/XDC-Icon.svg"></img>&nbsp;XDC
-                v.0.0.3
+                V1.0
+                <img style={{width: "110px"}} src="https://www.portalbridge.com/static/media/portal_logo_w.484271a5c853855c2a4436a34d082aed.svg"></img>
               </p>
             }
           </div>
