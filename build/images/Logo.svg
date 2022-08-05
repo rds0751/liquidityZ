@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="134" height="26" viewBox="0 0 134 26">
+  <g id="Logo" transform="translate(-39 -16)">
+    <g id="Group_1" data-name="Group 1" transform="translate(39 16)">
+      <rect id="Rectangle_1" data-name="Rectangle 1" width="26" height="26" rx="8" fill="#fff"/>
+      <g id="Swap" transform="translate(0 1.622)">
+        <path id="Path_1" data-name="Path 1" d="M31.569,31.491h0l-5.725,5.725a1.216,1.216,0,0,0,0,1.719l5.725,5.725,1.719-1.719-3.649-3.649h14.5V36.859h-14.5l1.93-1.93h0L37.294,29.2a1.216,1.216,0,0,0,0-1.719L31.569,21.76,29.85,23.479,33.5,27.128H19v2.433H33.5Z" transform="translate(-19 -21.76)" fill="#102c78"/>
+      </g>
+    </g>
+    <text id="SmartSwap" transform="translate(70 35)" fill="#fff" font-size="17" font-family="Montserrat-Bold, Montserrat" font-weight="700"><tspan x="0" y="0">SmartSwap</tspan></text>
+  </g>
+</svg>
