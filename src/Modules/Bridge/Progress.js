@@ -83,7 +83,9 @@ import {
   TEST_ERC20,
   TEST_SOLANA_TOKEN
 } from "./consts";
+import { useSolanaWallet } from "../../contexts/SolanaWalletContext";
 import web3 from "../../utils/web3";
+import useIsWalletReady from "../../hooks/useIsWalletReady";
 import { 
   SOLANA_HOST,
   ETH_TOKEN_BRIDGE_ADDRESS,
@@ -100,6 +102,7 @@ export default function App() {
   const [hash, setHash] = useState("");
   const [hasher, setHasher] = useState("");
   const [progress, setProgress] = useState(0);
+  const solanaWallet = useSolanaWallet();
   let solAddress;
   toast.configure();
   const navigate = useNavigate()
@@ -203,29 +206,29 @@ export default function App() {
     const amount = parseUnits("843711", 0).toBigInt();
     const promise = transferFromSolana(
       connection,
-      'worm2ZoG2kUd4vFXhvjh93UUH596ayRfgQ2MgjNMTth',
-      'wormDTUJ6AWPNvk59vGQbDvGJmqbDTdgWgAqcLBCgUb',
-      '4MTwDKjWQZ5PgmpBGVJwg6Bckpsb66wY5p8sadgbceGk',
-      '98Wb4vTJB7CxoeEA2NfP93rPg4jizS9BktDG9mfvn5uF',
-      'A9mUU4qviSctJVPJdBJWkb28deg915LYJKrzQ19ji3FM',
-      '8437000000',
+      SOL_BRIDGE_ADDRESS,
+      SOL_TOKEN_BRIDGE_ADDRESS,
+      payerAddress,
+      fromAddress,
+      TEST_SOLANA_TOKEN,
+      amount,
       tryNativeToUint8Array(targetAddress, CHAIN_ID_ETH),
       2
     );
     const transaction = await promise;
     console.log(
       connection,
-      'worm2ZoG2kUd4vFXhvjh93UUH596ayRfgQ2MgjNMTth',
-      'wormDTUJ6AWPNvk59vGQbDvGJmqbDTdgWgAqcLBCgUb',
-      '4MTwDKjWQZ5PgmpBGVJwg6Bckpsb66wY5p8sadgbceGk',
-      '98Wb4vTJB7CxoeEA2NfP93rPg4jizS9BktDG9mfvn5uF',
-      'A9mUU4qviSctJVPJdBJWkb28deg915LYJKrzQ19ji3FM',
-      '8437000000',
+      SOL_BRIDGE_ADDRESS,
+      SOL_TOKEN_BRIDGE_ADDRESS,
+      payerAddress,
+      fromAddress,
+      TEST_SOLANA_TOKEN,
+      amount,
       tryNativeToUint8Array(targetAddress, CHAIN_ID_ETH),
       2,
       transaction
     );
-    const txid = await signSendAndConfirm(solProvider, connection, transaction);
+    const txid = await signSendAndConfirm(solanaWallet, connection, transaction);
     // const { signature } = await solProvider.signAndSendTransaction(transaction);
     // await connection.getSignatureStatus(signature);
     // sign, send, and confirm transaction

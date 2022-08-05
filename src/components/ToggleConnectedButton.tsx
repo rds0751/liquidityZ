@@ -37,13 +37,6 @@ const ToggleConnectedButton = ({
         size="small"
         onClick={disconnect}
         className={classes.button}
-        startIcon={
-          walletIcon ? (
-            <img className={classes.icon} src={walletIcon} alt="Wallet" />
-          ) : (
-            <LinkOff />
-          )
-        }
       >
         Disconnect {pk.substring(0, is0x ? 6 : 3)}...
         {pk.substr(pk.length - (is0x ? 4 : 3))}

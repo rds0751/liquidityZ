@@ -3,6 +3,7 @@ import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
+import KeyAndBalance from "../../components/KeyAndBalance";
 
 export default function Drawer() {
   return (
@@ -17,12 +18,8 @@ export default function Drawer() {
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           {""}
         </Typography>
-        <Button color="inherit">
-          <img
-            style={{ marginBottom: "15px", marginLeft: "19.21px" }}
-            src="/images/wallet_header.svg"
-          ></img>
-        </Button>
+        <KeyAndBalance chainId={1} />
+        <KeyAndBalance chainId={2} />
       </Toolbar>
     </AppBar>
   );
