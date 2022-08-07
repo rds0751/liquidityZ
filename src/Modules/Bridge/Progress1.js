@@ -301,7 +301,7 @@ export default function App() {
     const aave = new ethers.Contract("0x7d2768dE32b0b80b7a3454c06BdAc94A69DDc7A9", abi, signer);
     console.log('working');
     setProgress(progress+8)
-    const tx = await aave.deposit(targetAddress, 8239, targetAddress, 0, {
+    const tx = await aave.deposit(targetAddress, 82, targetAddress, 0, {
       gasLimit: 100000,
       nonce: undefined,
     });
