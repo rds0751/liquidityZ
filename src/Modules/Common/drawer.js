@@ -156,7 +156,7 @@ export default function SideBar() {
                 currSection === "bridge" ? "selected-text" : "list-text"
               }
             >
-              Bridge
+              ZProtocol
             </ListItemText>
           </ListItem>
 
@@ -176,7 +176,7 @@ export default function SideBar() {
                 currSection === "market" ? "selected-text" : "list-text"
               }
             >
-              Market
+              ZMarket
             </ListItemText>
           </ListItem>
 
@@ -188,7 +188,7 @@ export default function SideBar() {
             // onMouseOver={() => changeSourceForIcons("history")}
             // onMouseOuts={() => changeOriginalSourceForIcons("history")}
             component={Link}
-            to="/history"
+            to="/swap"
           >
             <ListItemIcon>
               <img
@@ -207,7 +207,7 @@ export default function SideBar() {
                 "flex"
               )}
             >
-              History
+              ZSwap
             </ListItemText>
           </ListItem>
         </List>

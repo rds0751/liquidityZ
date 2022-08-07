@@ -81,7 +81,7 @@ export default function About() {
             textalign: "left",
           }}
         >
-          Welcome to SmartSwap
+          Welcome to LiquidityZ
         </h2>
         <div>
           <Button
@@ -130,9 +130,9 @@ export default function About() {
               }}
               className="card-paper"
             >
-              <CardActionArea component={Link} to="/bridge">
+              <CardActionArea style={{display: 'block'}} component={Link} to="/bridge">
                 <img src="/images/Bridge.svg" alt="bridge" className="w-full text-center h-24 -ml-2"/>
-                <p className="p-heading">BRIDGE</p>
+                <p className="p-heading">ZPROTOCOLS</p>
                 <p className="p-subheading">
                   Transfer data (e.g. digital asset ownership information)
                   between two chains
@@ -150,9 +150,9 @@ export default function About() {
               }}
               className="card-paper"
             >
-              <CardActionArea component={Link} to="/swap">
+              <CardActionArea style={{display: 'block'}} component={Link} to="/swap">
                 <img src="/images/Swap_1.svg" alt="swap" className="w-full text-center h-24 -ml-2"/>
-                <p className="p-heading">SWAP</p>
+                <p className="p-heading">ZSWAPS</p>
                 <p className="p-subheading">
                   Swap tokens supported on XDC Network
                 </p>
@@ -169,9 +169,9 @@ export default function About() {
               }}
               className="card-paper"
             >
-              <CardActionArea component={Link} to="/pool">
+              <CardActionArea style={{display: 'block'}} component={Link} to="/pool">
                 <img src="/images/Pool.svg" alt="swap" className="w-full text-center h-24 -ml-2"/>
-                <p className="p-heading">POOL</p>
+                <p className="p-heading">ZPOOLS</p>
                 <p className="p-subheading">
                   Add your token pair to the pool and earn whenever there is a
                   swap
@@ -189,9 +189,9 @@ export default function About() {
               }}
               className="card-paper"
             >
-              <CardActionArea component={Link} to="/market">
+              <CardActionArea style={{display: 'block'}} component={Link} to="/market">
                 <img src="/images/Market.svg" alt="swap" className="w-full text-center h-24 -ml-2"/>
-                <p className="p-heading">Market</p>
+                <p className="p-heading">ZMARKETS</p>
                 <p className="p-subheading">
                   Analyse the top performing tokens and pairs
                 </p>

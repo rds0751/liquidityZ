@@ -2,41 +2,15 @@ import React, { useState } from "react";
 import Header from "../Common/header";
 import SideBar from "../Common/drawer";
 import Box from "@mui/material/Box";
-import { Button } from "react-bootstrap";
 import { Divider } from "@mui/material";
 import { Modal } from "react-bootstrap";
 import ProgressBar from "./Progress1";
 import ProgressBar1 from "./Progress";
 import { Link, useLocation } from "react-router-dom";
-import { PregnantWomanSharp } from "@material-ui/icons";
-import xdc3 from "../../utils/xdc3";
-import Web3 from "web3";
-import token from "../../utils/xtoken";
-import xbridge from "../../utils/xbridge";
-import tokenList from "../../contracts/tokenlist.json";
-import Bridge from "../../contracts/bridge.json";
-import Deploy from "../../contracts/deployer.json";
-import {
-  tokenBridge,
-  tokenDeployee,
-  eBridgeAddress,
-  deployee,
-  xBridgeAddress,
-} from "../../common/constant";
-let debridgeId,
-  submissionId,
-  signatures,
-  abc,
-  transactionHash,
-  transactionHashes,
-  transaction;
 //Main Function
 function BridgeConfirm() {
   const [show, setShow] = useState(false);
-  const [chainTo, setChainTo] = useState("");
-  const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const location = useLocation();
   return (
     <>
       <Box>
@@ -51,38 +25,37 @@ function BridgeConfirm() {
             <p className="review">Review Transaction</p>
             <Divider className="mb-23" />
             <div className="image-flex">
-              <img className="token-img" src={location?.state?.source}></img>
+              <img className="token-img" src='/images/XDC.svg'></img>
               <img src="/images/Arrow.svg" alt="sachin"></img>
               <img
                 className="token-img"
-                src={location?.state?.destination}
+                src="/images/ethereum.svg"
               ></img>
             </div>
             <div className="asset-flex">
-              <p className="content">Asset</p>
+              <p className="content">Protocol</p>
               <p className="second-p sub-content">
-                {location.state.selectedOptionToken.name}
+                Ethereum AAVE V2
               </p>
             </div>
             <Divider className="mb-23" />
             <div className="asset-flex">
-              <p className="content">Amount</p>
-              <p className="sub-content">{location.state.amount}</p>
-              {console.log("njnvd", location.state.amount)}
+              <p className="content">Task</p>
+              <p className="sub-content">Lending</p>
             </div>
             <Divider className="mb-23" />
             <div className="asset-flex">
-              <p>Destination</p>
-              <p>{location.state.address}</p>
+              <p className="content">Asset</p>
+              <p className="sub-content">USDC</p>
             </div>
             <Divider className="mb-23" />
             <div className="asset-flex">
-              <p className="content">You will get</p>
-              <p className="sub-content">{location.state.amount}</p>
+              <p>Amount</p>
+              <p>1</p>
             </div>
             <Divider className="mb-23" />
             <div style={{ display: "flex", justifyContent: "space-between" }}>
-              <Link to="/bridge">
+              <Link to="/">
                 {" "}
                 <button className="cancel-button">Cancel</button>{" "}
               </Link>
@@ -99,11 +72,7 @@ function BridgeConfirm() {
         animation={false}
       >
         <Modal.Header>
-          {location?.state?.selectedOptionToken?.type === 100 ? (
-            <ProgressBar1 />
-          ) : (
             <ProgressBar />
-          )}
         </Modal.Header>
         <Modal.Body></Modal.Body>
       </Modal>

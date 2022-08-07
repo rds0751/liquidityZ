@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { formatUnits, parseUnits } from "@ethersproject/units";
+import { NodeHttpTransport } from "@improbable-eng/grpc-web-node-http-transport";
 // import toast from 'react-toastify';
 import { toast } from "react-toastify";
 import XDC3 from "xdc3";
@@ -75,7 +76,8 @@ import {
   updateWrappedOnEth,
   WormholeWrappedInfo,
   setDefaultWasm,
-  safeBigIntToNumber
+  safeBigIntToNumber,
+  getSignedVAAWithRetry
 } from '@certusone/wormhole-sdk';
 import {
   ETH_CORE_BRIDGE_ADDRESS,
@@ -90,9 +92,12 @@ import {
   SOLANA_HOST,
   ETH_TOKEN_BRIDGE_ADDRESS,
   SOL_BRIDGE_ADDRESS,
-  SOL_TOKEN_BRIDGE_ADDRESS
+  SOL_TOKEN_BRIDGE_ADDRESS,
+  WORMHOLE_RPC_HOSTS
  } from "../../utils/consts";
+import { wait } from "@testing-library/react";
 const { ethers } = require("ethers");
+import abi from "../../contracts/aave.json";
 
 const CORE_ID = BigInt(4);
 const TOKEN_BRIDGE_ID = BigInt(6);
@@ -203,7 +208,7 @@ export default function App() {
     console.log('balance before transfer', initialBalOnEthFormatted);
 
     // transfer the test token
-    const amount = parseUnits("843711", 0).toBigInt();
+    const amount = parseUnits("8437", 0).toBigInt();
     const promise = transferFromSolana(
       connection,
       SOL_BRIDGE_ADDRESS,
@@ -213,29 +218,30 @@ export default function App() {
       TEST_SOLANA_TOKEN,
       amount,
       tryNativeToUint8Array(targetAddress, CHAIN_ID_ETH),
-      2
+      2,
+      tryNativeToUint8Array('0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48', CHAIN_ID_ETH),
+      2,
+      undefined,
+      parseUnits("0", 0).toBigInt()
     );
     const transaction = await promise;
-    console.log(
-      connection,
-      SOL_BRIDGE_ADDRESS,
-      SOL_TOKEN_BRIDGE_ADDRESS,
-      payerAddress,
-      fromAddress,
-      TEST_SOLANA_TOKEN,
-      amount,
-      tryNativeToUint8Array(targetAddress, CHAIN_ID_ETH),
-      2,
-      transaction
-    );
-    const txid = await signSendAndConfirm(solanaWallet, connection, transaction);
-    // const { signature } = await solProvider.signAndSendTransaction(transaction);
-    // await connection.getSignatureStatus(signature);
-    // sign, send, and confirm transaction
-    // transaction.partialSign(keypair);
-    // const txid = await connection.sendRawTransaction(
-    //   transaction.serialize()
+    // console.log(
+    //   connection,
+    //   SOL_BRIDGE_ADDRESS,
+    //   SOL_TOKEN_BRIDGE_ADDRESS,
+    //   payerAddress,
+    //   fromAddress,
+    //   TEST_SOLANA_TOKEN,
+    //   amount,
+    //   tryNativeToUint8Array(targetAddress, CHAIN_ID_ETH),
+    //   2,
+    //   tryNativeToUint8Array('0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48', CHAIN_ID_ETH),
+    //   2,
+    //   undefined,
+    //   parseUnits("0", 0).toBigInt()
     // );
+    // sign, send, and confirm transaction
+    const txid = await signSendAndConfirm(solanaWallet, connection, transaction);
     console.log('working');
     await connection.confirmTransaction(txid);
     const info = await connection.getTransaction(txid);
@@ -247,7 +253,7 @@ export default function App() {
     // get the sequence from the logs (needed to fetch the vaa)
     const sequence = parseSequenceFromLogSolana(info);
     const emitterAddress = await getEmitterAddressSolana(
-      SOLANA_TOKEN_BRIDGE_ADDRESS
+      SOL_TOKEN_BRIDGE_ADDRESS
     );
     // poll until the guardian(s) witness and sign the vaa
     const { vaaBytes: signedVAA } = await getSignedVAAWithRetry(
@@ -260,27 +266,25 @@ export default function App() {
       }
     );
     await redeemOnEth(ETH_TOKEN_BRIDGE_ADDRESS, signer, signedVAA);
-
-    // Get final balance on Solana
-    results = await connection.getParsedTokenAccountsByOwner(
-      keypair.publicKey,
-      tokenFilter
+    // APPROVE
+    await approveEth(
+      '0x7d2768dE32b0b80b7a3454c06BdAc94A69DDc7A9', //contract
+      '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48', //token
+      signer, 
+      1000000 // amount
     );
-    let finalSolanaBalance = 0;
-    for (const item of results.value) {
-      const tokenInfo = item.account.data.parsed.info;
-      const address = tokenInfo.mint;
-      const amount = tokenInfo.tokenAmount.uiAmount;
-      if (tokenInfo.mint === TEST_SOLANA_TOKEN) {
-        finalSolanaBalance = amount;
-      }
-    }
+    // deposit function contract call
+    const aave = new ethers.Contract("0x7d2768dE32b0b80b7a3454c06BdAc94A69DDc7A9", abi, signer);
+    console.log('working');
+    const tx = await aave.deposit(targetAddress, 8239, targetAddress, 0, {
+      gasLimit: 100000,
+      nonce: undefined,
+    });
+    console.log('working');
+    const rec = await tx.wait();
+    console.log('working');
+    console.log(rec);
 
-    // Get the final balance on Eth
-    const finalBalOnEth = await token.balanceOf(
-      ETH_TEST_WALLET_PUBLIC_KEY
-    );
-    const finalBalOnEthFormatted = formatUnits(finalBalOnEth._hex, 9);
   };
   useEffect(() => {
     OnSubmit();
