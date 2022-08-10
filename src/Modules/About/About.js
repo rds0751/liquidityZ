@@ -62,7 +62,7 @@ export default function About() {
             textalign: "left",
           }}
         >
-          Welcome to LiquidityZ
+          Welcome to 1492 Finance
         </h2>
       </Box>
       <Grid
