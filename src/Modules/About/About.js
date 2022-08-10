@@ -29,26 +29,6 @@ export default function About() {
   const [popup, setPopup] = useState(1);
   const [accounting, setAccount] = useState("");
   toast.configure();
-  window.web3 = new Web3(window.xdc ? window.xdc : window.ethereum);
-  const handleXDCPayWallet = async () => {
-    if (window.web3.currentProvider) {
-      if (!window.web3.currentProvider.hasOwnProperty("chainId")) {
-        if (!window.xdc) {
-          setPopup(2);
-          alert();
-        } else {
-          const state = window.web3.givenProvider.publicConfigStore
-            ? window.web3.givenProvider.publicConfigStore._state
-            : window.web3.currentProvider.publicConfigStore._state;
-          let address = state.selectedAddress;
-          let network =
-            state.networkVersion === "50"
-              ? NETWORKS.XDC_MAINNET
-              : NETWORKS.XDC_APOTHEM_TESTNET;
-        }
-      }
-    }
-  };
   let account = false;
   window.web3.eth.getAccounts((err, accounts) => {
     if (accounts.length === 0) {
@@ -61,7 +41,8 @@ export default function About() {
       accountings = accounts;
       setButtonText(truncateString(accounts.toString()));
     }
-  }); 
+  }
+  ); 
   return (
     <div>
       <Box
@@ -76,45 +57,13 @@ export default function About() {
             height: "30px",
             marginLeft: "210px",
             letterspacing: "0px",
-            color: "#102C78",
+            color: "#000000",
             opacity: "1",
             textalign: "left",
           }}
         >
           Welcome to LiquidityZ
         </h2>
-        <div>
-          <Button
-            onClick={() => handleXDCPayWallet()}
-            className="connect-wallet btn-primary label"
-            variant="primary"
-          >
-            {" "}
-            <div
-              style={{
-                display: "flex",
-                alignContent: "top",
-              }}
-            >
-              <Jazzicon
-                diameter={28}
-                seed={Math.round(Math.random() * 10000000)}
-              />
-              <div
-                style={{
-                  fontFamily: "Inter",
-                  fontSize: " normal normal 600 18px/21px",
-                  paddingTop: "5px",
-                  textAlign: "left",
-                  opacity: "1",
-                  marginLeft: "34px",
-                }}
-              >
-                {buttonText}
-              </div>
-            </div>
-          </Button>{" "}
-        </div>
       </Box>
       <Grid
         item

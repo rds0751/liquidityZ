@@ -10,20 +10,20 @@
   padding: 30px;
 }
 .indexedStep {
-  color: #2358E5;
+  color: #000000;
   top: 68px;
   left: 1002px;
   width: 32px;
   height: 32px;
   background: #ffffff 0% 0% no-repeat padding-box;
   border-radius: 50% !important;
-  border  : solid #2358E5 .5px !important;
+  border  : solid #000000 .5px !important;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 .indexedStep.accomplished {
-  border  : solid #2358E5 0px !important;
+  border  : solid #000000 0px !important;
   background-color: #20AA15;
   color: #ffffff; 
 }
@@ -40,8 +40,12 @@ margin-top: 30px;
 .done{
   align-items: center;
   flex-direction: column;
-  margin-top: 88px;
+  margin-top: 40px;
 }
+@keyframes blink {50% { color: transparent }}
+.loader__dot { animation: 1s blink infinite }
+.loader__dot:nth-child(2) { animation-delay: 250ms }
+.loader__dot:nth-child(3) { animation-delay: 500ms }
 .successImg{
 height: 70px;
 width: 70px;

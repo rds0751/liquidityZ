@@ -1,11 +1,11 @@
 .my-card {
   background-color: white;
   width: 606px;
-  height: 675px;
+  height: max-content;
   border-radius: 10px;
   padding-left: 2.5%;
   padding-right: 2.5%;
-  margin-left: 37%;
+  margin-left: 39%;
     margin-top: 1.5%;
     margin-bottom: 98px !important;
     box-shadow: none !important;

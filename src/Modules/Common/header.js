@@ -10,15 +10,15 @@ export default function Drawer() {
     <AppBar
       position="fixed"
       style={{
-        background: "#2149B9 0% 0% no-repeat padding-box",
+        background: "#000000 0% 0% no-repeat padding-box",
         height: "48px",
       }}
     >
-      <Toolbar>
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+      <Toolbar style={{background: "#ffffff"}}>
+        <Typography variant="h6" component="div" sx={{ flexGrow: 1, margin: 3 }}>
           {""}
         </Typography>
-        <KeyAndBalance chainId={1} />
+        <KeyAndBalance chainId={1} />&nbsp;&nbsp;&nbsp;&nbsp;
         <KeyAndBalance chainId={2} />
       </Toolbar>
     </AppBar>

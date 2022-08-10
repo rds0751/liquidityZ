@@ -9,7 +9,7 @@
     letter-spacing: 0px;
     font-size: 17px;
     font-family: inter;
-    color: #102C78;
+    color: #000000;
     opacity: 1;
     background: transparent;
     width: 60px;
@@ -24,7 +24,7 @@
     border: none;
     font: normal normal medium 16px/20px Inter;
 letter-spacing: 0px;
-color: #2358E5;
+color: #000000;
 }
 .heading-p{
     width: 70px;
@@ -58,7 +58,7 @@ color: #2358E5;
     width: 127px;
 height: 36px;
 /* UI Properties */
-background: #2358E5 0% 0% no-repeat padding-box;
+background: #000000 0% 0% no-repeat padding-box;
 border-radius: 26px;
 opacity: 1;
 text-align: center;

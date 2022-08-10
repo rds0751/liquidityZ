@@ -5,15 +5,10 @@ import Drawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import classnames from "classnames";
-import MuiListItem from "@material-ui/core/ListItem";
-import { makeStyles, withStyles } from "@material-ui/core/styles";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import MailIcon from "@mui/icons-material/Mail";
 import { Link } from "react-router-dom";
-import Typography from "@mui/material/Typography";
 import "./index.css";
-import { useEffect } from "react";
 // const useStyles = makeStyles((theme) => ({
 //   root: {
 //     width: "100%",
@@ -101,7 +96,7 @@ export default function SideBar() {
           <Toolbar>
             <img
               style={{ width: "134px", height: "134px", marginLeft: "7px", marginTop: "31px" }}
-              src="https://imgur.com/lfWtixh.png"
+              src="https://imgur.com/YLMULPb.png"
             ></img>{" "}
           </Toolbar>
         </div>
@@ -115,11 +110,7 @@ export default function SideBar() {
             <ListItemIcon>
               <img
                 style={{ paddingLeft: "10px" }}
-                src={
-                  currSection === "about"
-                    ? "/images/noun_Home_white.svg"
-                    : "/images/noun_Home_coloured.svg"
-                }
+                src="/images/noun_Home_white.svg"
               ></img>
             </ListItemIcon>
             <ListItemText
@@ -144,11 +135,7 @@ export default function SideBar() {
             <ListItemIcon>
               <img
                 style={{ paddingLeft: "10px" }}
-                src={
-                  currSection === "bridge"
-                    ? "/images/bridge_White.svg"
-                    : "/images/bridge_Colored.svg"
-                }
+                src="/images/bridge_White.svg"
               ></img>
             </ListItemIcon>
             <ListItemText
@@ -164,11 +151,7 @@ export default function SideBar() {
             <ListItemIcon>
               <img
                 style={{ paddingLeft: "10px" }}
-                src={
-                  currSection === "market"
-                    ? "/images/chart_white.svg"
-                    : "/images/chart_coloured.svg"
-                }
+                src="/images/chart_white.svg"
               ></img>
             </ListItemIcon>
             <ListItemText
@@ -193,11 +176,7 @@ export default function SideBar() {
             <ListItemIcon>
               <img
                 style={{ paddingLeft: "10px" }}
-                src={
-                  currSection === "history"
-                    ? "/images/history_White.svg"
-                    : "/images/history_Coloured.svg"
-                }
+                src="/images/history_White.svg"
               ></img>
             </ListItemIcon>
             <ListItemText

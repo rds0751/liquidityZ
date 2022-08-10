@@ -10,19 +10,18 @@ import { Link, useLocation } from "react-router-dom";
 //Main Function
 function BridgeConfirm() {
   const [show, setShow] = useState(false);
-  const handleShow = () => setShow(true);
+  const handleShow = () => setShow(false);
   return (
     <>
       <Box>
         <Header />
         <SideBar />
         <div>
-          <div className="main-head">
-            {" "}
-            <p style={{ marginTop: "-62px", marginBottom: "32px" }}>Bridge</p>
+          <div className="main-head" style={{ justifyContent: "space-between" }}>
+            <p>Ethereum 1492</p>
           </div>
           <div className="my-card my-card-second">
-            <p className="review">Review Transaction</p>
+            <p className="review">Transaction Details</p>
             <Divider className="mb-23" />
             <div className="image-flex">
               <img className="token-img" src='/images/XDC.svg'></img>
@@ -54,28 +53,10 @@ function BridgeConfirm() {
               <p>1</p>
             </div>
             <Divider className="mb-23" />
-            <div style={{ display: "flex", justifyContent: "space-between" }}>
-              <Link to="/">
-                {" "}
-                <button className="cancel-button">Cancel</button>{" "}
-              </Link>
-              <button className="confirm-button" onClick={handleShow}>
-                Confirm
-              </button>
-            </div>
+            <ProgressBar />
           </div>
         </div>
       </Box>
-      <Modal
-        style={{ marginTop: "5px", zIndex: "999999999" }}
-        show={show}
-        animation={false}
-      >
-        <Modal.Header>
-            <ProgressBar />
-        </Modal.Header>
-        <Modal.Body></Modal.Body>
-      </Modal>
     </>
   );
 }

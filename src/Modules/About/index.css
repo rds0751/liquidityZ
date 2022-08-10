@@ -61,8 +61,8 @@ top: -13px;
 }
 .btn-primary{
   color: #ffffff;
-  background-color: #2358E5 ;
-  border-color:#0d6efd ;
+  background-color: #000000 ;
+  border-color:#000000 ;
 }
 .label {
   flexDirection: "column"

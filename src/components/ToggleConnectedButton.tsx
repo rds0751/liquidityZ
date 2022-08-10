@@ -32,9 +32,9 @@ const ToggleConnectedButton = ({
   return connected ? (
     <Tooltip title={pk}>
       <Button
-        color="primary"
+        color="inherit"
         variant="contained"
-        size="small"
+        size="medium"
         onClick={disconnect}
         className={classes.button}
       >
@@ -44,9 +44,9 @@ const ToggleConnectedButton = ({
     </Tooltip>
   ) : (
     <Button
-      color="primary"
+      color="inherit"
       variant="contained"
-      size="small"
+      size="medium"
       onClick={connect}
       className={classes.button}
     >

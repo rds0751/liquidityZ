@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36">
   <g id="Auto_fresh_on" data-name="Auto fresh on" transform="translate(-1169 -198)">
-    <rect id="Rectangle_22" data-name="Rectangle 22" width="36" height="36" rx="18" transform="translate(1169 198)" fill="#2358e5"/>
+    <rect id="Rectangle_22" data-name="Rectangle 22" width="36" height="36" rx="18" transform="translate(1169 198)" fill="#000000"/>
     <g id="Clock" transform="translate(1173 202)">
       <path id="Path_784" data-name="Path 784" d="M14,5a9,9,0,1,0,9,9A9.01,9.01,0,0,0,14,5Zm0,17a8,8,0,1,1,8-8A8.009,8.009,0,0,1,14,22Z" fill="#fff"/>
       <path id="Path_785" data-name="Path 785" d="M51.584,25.615H48.521v-5.1a.51.51,0,0,0-1.021,0v5.615a.51.51,0,0,0,.51.51h3.573a.51.51,0,1,0,0-1.021Z" transform="translate(-34.059 -12.036)" fill="#fff"/>

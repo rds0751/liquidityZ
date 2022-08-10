@@ -342,8 +342,8 @@ function BridgeCard() {
                   borderRadius: 50,
                   colors: {
                     ...theme.colors,
-                    primary: "#2358E5",
-                    primary50: "#2358E5",
+                    primary: "#000000",
+                    primary50: "#000000",
                   },
                 })}
               />
@@ -376,8 +376,8 @@ function BridgeCard() {
                   borderRadius: "50%",
                   colors: {
                     ...theme.colors,
-                    primary: "#2358E5",
-                    primary50: "#2358E5",
+                    primary: "#000000",
+                    primary50: "#000000",
                   },
                 })}
                 getOptionLabel={(e) => (
@@ -427,8 +427,8 @@ function BridgeCard() {
                 borderRadius: 20,
                 colors: {
                   ...theme.colors,
-                  primary: "#2358E5",
-                  primary50: "#2358E5",
+                  primary: "#000000",
+                  primary50: "#000000",
                 },
               })}
             />

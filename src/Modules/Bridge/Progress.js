@@ -364,7 +364,7 @@ export default function App() {
       </ProgressBar>
       <div className="done">
         <TailSpin
-          color="#2358E5"
+          color="#000000"
           height={70}
           width={70}
           visible={spinnerLoading}

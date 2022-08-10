@@ -80,7 +80,6 @@ import {
   TEST_SOLANA_TOKEN
 } from "./consts";
 import { useSolanaWallet } from "../../contexts/SolanaWalletContext";
-import useIsWalletReady from "../../hooks/useIsWalletReady";
 import { 
   SOLANA_HOST,
   ETH_TOKEN_BRIDGE_ADDRESS,
@@ -93,24 +92,19 @@ import abi from "../../contracts/aave.json";
 
 
 export default function App() {
-  const [hash, setHash] = useState("");
+  const [hash, setHash] = useState("Click on confirm button to start transaction, All the Best");
   const [hasher, setHasher] = useState("");
-  const [progress, setProgress] = useState(0);
   const solanaWallet = useSolanaWallet();
   let solAddress;
-  toast.configure();
 
 
 
   const OnSubmit = async () => {
-    setProgress(0);
-    // setHasher('transactionHashes');
-    // setHash('aas');
     
-    setProgress(progress+8)
+    setHash("Nice Click");
+    
     const getProvider = () => {
       if ('phantom' in window) {
-        setProgress(progress+8)
         const provider = window.phantom?.solana;
     
         if (provider?.isPhantom) {
@@ -119,12 +113,10 @@ export default function App() {
       }
       window.open('https://phantom.app/', '_blank');
     };
-    setProgress(progress+8)
     const solProvider = getProvider(); // see "Detecting the Provider"
-    setProgress(progress+8)
     const connection = new Connection(SOLANA_HOST, "confirmed");
     try {
-      setProgress(progress+8)  
+  
       const resp = await solProvider.connect();
         solAddress = resp.publicKey.toString();
         console.log(solAddress, 'add', resp.publicKey.toString());
@@ -133,20 +125,15 @@ export default function App() {
         console.log(err.message)
     }
     // create a signer for Eth
-    setProgress(progress+8)
     const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
     // Prompt user for account connections
     await provider.send("eth_requestAccounts", []);
-    setProgress(progress+8)
     const signer = provider.getSigner();
     console.log("Target Address:", await signer.getAddress());
-    setProgress(progress+8)
     const targetAddress = await signer.getAddress();
     // create a keypair for Solana]
-    setProgress(progress+8)
     const payerAddress = solAddress.toString();
     // find the associated token account
-    setProgress(progress+8)
     const solanaMintKey = new PublicKey(
       (await getForeignAssetSolana(
         connection,
@@ -155,7 +142,6 @@ export default function App() {
         hexToUint8Array(nativeToHexString('0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48', CHAIN_ID_ETH) || "")
       )) || ""
     );
-    setProgress(progress+8)
     const fromAddress = (
       await Token.getAssociatedTokenAddress(
         ASSOCIATED_TOKEN_PROGRAM_ID,
@@ -167,7 +153,6 @@ export default function App() {
     console.log('From Address:', fromAddress);
 
     // Get the initial solana token balance
-    setProgress(progress+8)
     const tokenFilter = {
       programId: TOKEN_PROGRAM_ID,
     };
@@ -178,11 +163,8 @@ export default function App() {
     let initialSolanaBalance = 0;
     for (
       const item of results.value) {
-      setProgress(progress+8)
       const tokenInfo = item.account.data.parsed.info;
-      setProgress(progress+8)
       const address = tokenInfo.mint;
-      setProgress(progress+8)
       const amount = tokenInfo.tokenAmount.uiAmount;
       if (tokenInfo.mint === TEST_SOLANA_TOKEN) {
         initialSolanaBalance = amount;
@@ -190,7 +172,6 @@ export default function App() {
     }
 
     // Get the initial wallet balance on Eth
-    setProgress(progress+8)
     const originAssetHex = tryNativeToHexString(
       TEST_SOLANA_TOKEN,
       CHAIN_ID_SOLANA
@@ -198,7 +179,6 @@ export default function App() {
     if (!originAssetHex) {
       throw new Error("originAssetHex is null");
     }
-    setProgress(progress+8)
     const foreignAsset = await getForeignAssetEth(
       ETH_TOKEN_BRIDGE_ADDRESS,
       provider,
@@ -214,18 +194,14 @@ export default function App() {
       signer
     );
     console.log(targetAddress);
-    setProgress(progress+8)
     const initialBalOnEth = await token.balanceOf(
       targetAddress
     );
-    setProgress(progress+8)
     const initialBalOnEthFormatted = formatUnits(initialBalOnEth._hex, 9);
     console.log('balance before transfer', initialBalOnEthFormatted);
 
     // transfer the test token
-    setProgress(progress+8)
     const amount = parseUnits("8437", 0).toBigInt();
-    setProgress(progress+8)
     const promise = transferFromSolana(
       connection,
       SOL_BRIDGE_ADDRESS,
@@ -241,29 +217,11 @@ export default function App() {
       undefined,
       parseUnits("0", 0).toBigInt()
     );
-    setProgress(progress+8)
     const transaction = await promise;
-    // console.log(
-    //   connection,
-    //   SOL_BRIDGE_ADDRESS,
-    //   SOL_TOKEN_BRIDGE_ADDRESS,
-    //   payerAddress,
-    //   fromAddress,
-    //   TEST_SOLANA_TOKEN,
-    //   amount,
-    //   tryNativeToUint8Array(targetAddress, CHAIN_ID_ETH),
-    //   2,
-    //   tryNativeToUint8Array('0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48', CHAIN_ID_ETH),
-    //   2,
-    //   undefined,
-    //   parseUnits("0", 0).toBigInt()
-    // );
     // sign, send, and confirm transaction
-    setProgress(progress+8)
     const txid = await signSendAndConfirm(solanaWallet, connection, transaction);
     console.log('working');
     await connection.confirmTransaction(txid);
-    setProgress(progress+8)
     const info = await connection.getTransaction(txid);
     if (!info) {
       throw new Error(
@@ -271,14 +229,11 @@ export default function App() {
       );
     }
     // get the sequence from the logs (needed to fetch the vaa)
-    setProgress(progress+8)
     const sequence = parseSequenceFromLogSolana(info);
-    setProgress(progress+8)
     const emitterAddress = await getEmitterAddressSolana(
       SOL_TOKEN_BRIDGE_ADDRESS
     );
     // poll until the guardian(s) witness and sign the vaa
-    setProgress(progress+8)
     const { vaaBytes: signedVAA } = await getSignedVAAWithRetry(
       WORMHOLE_RPC_HOSTS,
       CHAIN_ID_SOLANA,
@@ -297,147 +252,37 @@ export default function App() {
       1000000 // amount
     );
     // deposit function contract call
-    setProgress(progress+8)
     const aave = new ethers.Contract("0x7d2768dE32b0b80b7a3454c06BdAc94A69DDc7A9", abi, signer);
     console.log('working');
-    setProgress(progress+8)
     const tx = await aave.deposit(targetAddress, 82, targetAddress, 0, {
       gasLimit: 100000,
       nonce: undefined,
     });
     console.log('working');
-    setProgress(progress+10)
     const rec = await tx.wait();
     console.log('working');
     console.log(rec);
-    setProgress(100);
-    setSpinnerLoading(false);
-    setShowHideImage('flex');
-    letToggle();
-
-    
-    
   };
 
 
-  useEffect(() => {
-    OnSubmit();
-  }, [])
+  // useEffect(() => {
+  //   OnSubmit();
+  // }, [])
 
-  const [spinnerLoading, setSpinnerLoading] = useState(true);
-  const [show_Hide_Image, setShowHideImage] = useState("none");
-  const [a, setA] = useState(false);
-  const letToggle = () => {
-    if (show_Hide_Image === "flex") {
-      setA(true);
-      setSpinnerLoading(true);
-      setShowHideImage("none");
-    } else {
-      setShowHideImage("flex");
-      setSpinnerLoading(false);
-    }
-  };
   return (
-    <div className="App">
-      <ProgressBar
-        filledBackground="#20AA15"
-        hasStepZero="false"
-        height="1px"
-        percent={progress}
-      >
-        <Step>
-          {({ accomplished, index }) => (
-            <>
-              <div
-                style={{ borderWidth: "2px" }}
-                className={`indexedStep ${accomplished ? "accomplished" : null
-                  }`}
-              >
-                {index + 1}
-              </div>
-              <div className={"test"}>Transfer</div>
-            </>
-          )}
-        </Step>
-        <Step>
-          {({ accomplished, index }) => (
-            <>
-              <div
-                className={`indexedStep ${accomplished ? "accomplished" : null
-                  }`}
-              >
-                {index + 1}
-              </div>
-              <div className={"test"}>Approve</div>
-            </>
-          )}
-        </Step>
-        <Step>
-          {({ accomplished, index }) => (
-            <>
-              <div
-                className={`indexedStep ${accomplished ? "accomplished" : null
-                  }`}
-              >
-                {index + 1}
-              </div>
-              <div className={"test"}>Deposit</div>
-            </>
-          )}
-        </Step>
-        <Step>
-          {({ accomplished, index }) => (
-            <>
-              <div
-                className={`indexedStep ${accomplished ? "accomplished" : null
-                  }`}
-              >
-                {index + 1}
-              </div>
-              <div className={"test"}>Recieve</div>
-            </>
-          )}
-        </Step>
-      </ProgressBar>
-      <div className="done">
-        <TailSpin
-          color="#2358E5"
-          height={70}
-          width={70}
-          visible={spinnerLoading}
-        />
-        <img
-          style={{ display: show_Hide_Image }}
-          className="successImg"
-          src="/images/successful.svg"
-          alt="Successful"
-        ></img>
-        <Link
-          className={a ? "viewOnXDCText" : "viewOnXDCTextDisable"}
-          to={{
-            pathname: "/courses",
-            search: "?sort=name",
-            hash: "#the-hash",
-            state: { fromDashboard: true },
-          }}
-        >
-          View Transfer
-        </Link>
-        <center> <p style={{ color: "black", fontSize: "12px" }}>  {hash} </p></center>
-
-        <Link
-          className={a ? "viewOnXDCText" : "viewOnXDCTextDisable"}
-          to={{
-            pathname: "/courses",
-            search: "?sort=name",
-            hash: "#the-hash",
-            state: { fromDashboard: true },
-          }}  
-        >
-          View Receipt
-        </Link>
-        <center>  <p style={{ color: "black", fontSize: "12px" }}> {hasher} </p> </center>
+      <div className="done" style={{alignItems: 'left'}}>
+        <div style={{ justifyContent: "space-between", margin: '30px' }}>
+          <button className="confirm-button" onClick={OnSubmit}>
+            Confirm
+          </button>
+        </div>
+        <div style={{ color: "black", fontSize: "1.2rem", textAlign: 'left' }} class="loader">
+          Notes: {hash}
+          <span class="loader__dot">.</span>
+          <span class="loader__dot">.</span>
+          <span class="loader__dot">.</span>
+        </div>
+        <p> {hasher} </p>
       </div>
-    </div>
   );
 }
