@@ -194,8 +194,8 @@ export default function SideBar() {
           <div style={{ marginLeft: "14px" }}>
             {
               <p className="powered">
-                V1.0
-                <img style={{width: "110px"}} src="https://www.portalbridge.com/static/media/portal_logo_w.484271a5c853855c2a4436a34d082aed.svg"></img>
+                V1.19 Powered by&nbsp;
+                <img style={{width: "20px"}} src="https://cryptologos.cc/logos/aave-aave-logo.png"></img>
               </p>
             }
           </div>
