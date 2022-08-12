@@ -20,10 +20,22 @@ import {
   Switch,
 } from "react-router-dom";
 import HistoryDetails from "./Modules/HistoryDetails";
+import ErrorBoundary from "./ErrorBoundary";
+import { theme } from "./muiTheme";
+import { store } from "./store";
+import { CssBaseline } from "@material-ui/core";
+import { ThemeProvider } from "@material-ui/core/styles";
+import { Provider } from "react-redux";
 
 function App() {
   return (
     <div className="App">
+      
+  <ErrorBoundary>
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <ErrorBoundary>
       <SolanaWalletProvider>
         <EthereumProviderProvider>
           <Router>
@@ -51,6 +63,7 @@ function App() {
           </Router>
         </EthereumProviderProvider>
       </SolanaWalletProvider>
+      </ErrorBoundary></ThemeProvider></Provider></ErrorBoundary>
     </div>
   );
 }
