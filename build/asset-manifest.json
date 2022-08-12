@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.fe0f1350.css",
-    "main.js": "/static/js/main.7d4bc8ca.js",
+    "main.js": "/static/js/main.185e80eb.js",
     "static/js/516.52a17175.chunk.js": "/static/js/516.52a17175.chunk.js",
     "static/js/673.fe20a0c2.chunk.js": "/static/js/673.fe20a0c2.chunk.js",
     "static/js/776.9d9e60b5.chunk.js": "/static/js/776.9d9e60b5.chunk.js",
@@ -24,10 +24,8 @@
     "static/js/536.47664537.chunk.js": "/static/js/536.47664537.chunk.js",
     "static/js/502.60004463.chunk.js": "/static/js/502.60004463.chunk.js",
     "module.wasm": "/56ce059712072b8c5654.module.wasm",
-    "static/media/SuisseBPIntlBold.woff2": "/static/media/SuisseBPIntlBold.19a3f46a5e2ccd6ff5ff.woff2",
     "static/media/neon.svg": "/static/media/neon.c3f3c0c2eeecc7d724bfcce581d1b4bf.svg",
     "static/media/terra2.svg": "/static/media/terra2.3b8a4497121229ac69ab6afa1c4e9317.svg",
-    "static/media/bg.svg": "/static/media/bg.7f578c3eb1b9a700a83d6113bf1579e0.svg",
     "index.html": "/index.html",
     "static/media/metamask-fox.svg": "/static/media/metamask-fox.ff320abc80456aa6f689de97f5bc29b4.svg",
     "static/media/ethereum.svg": "/static/media/ethereum.3477dbf799668d2ee5c41b4e1ee69385.svg",
@@ -49,6 +47,6 @@
   },
   "entrypoints": [
     "static/css/main.fe0f1350.css",
-    "static/js/main.7d4bc8ca.js"
+    "static/js/main.185e80eb.js"
   ]
 }
