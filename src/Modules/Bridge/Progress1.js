@@ -104,6 +104,7 @@ export default function App() {
 
   const OnSubmit = async () => {
     
+    console.log("setHash(Nice Click);')")
     setHash("Nice Click");
     try { 
     
@@ -123,6 +124,7 @@ export default function App() {
   
       const resp = await solProvider.connect();
         solAddress = resp.publicKey.toString();
+        console.log("    setHash(solAddress +')")
         setHash(solAddress + ' will send from');
         console.log(solAddress, 'add', resp.publicKey.toString());
         // 26qv4GCcx98RihuK3c4T6ozB3J7L6VwCuFVc7Ta2A3Uo 
@@ -136,6 +138,7 @@ export default function App() {
     const signer = provider.getSigner();
     console.log("Target Address:", await signer.getAddress());
     const targetAddress = await signer.getAddress();
+    console.log("setHash(metamask wallet')")
     setHash("metamask wallet "+ targetAddress);
     // // create a keypair for Solana]
     const payerAddress = solAddress.toString();
@@ -157,6 +160,7 @@ export default function App() {
       )
     ).toString();
     console.log('From Address:', fromAddress);
+    console.log("setHash(initialising solana')")
     setHash("initialising solana txn");
 
     // Get the initial solana token balance
@@ -183,9 +187,9 @@ export default function App() {
       TEST_SOLANA_TOKEN,
       CHAIN_ID_SOLANA
     );
-    if (!originAssetHex) {
-      throw new Error("originAssetHex is null");
-    }
+    // if (!originAssetHex) {
+    //   throw new Error("originAssetHex is null");
+    // }
     const foreignAsset = await getForeignAssetEth(
       ETH_TOKEN_BRIDGE_ADDRESS,
       provider,
@@ -193,9 +197,9 @@ export default function App() {
       hexToUint8Array(originAssetHex)
     );
     console.log('foreign', foreignAsset);
-    if (!foreignAsset) {
-      throw new Error("foreignAsset is null");
-    }
+    // if (!foreignAsset) {
+    //   throw new Error("foreignAsset is null");
+    // }
     let token = TokenImplementation__factory.connect(
       '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48', // TODO: MAKE IT DYNAMIC
       signer
@@ -224,6 +228,7 @@ export default function App() {
       undefined,
       parseUnits("0", 0).toBigInt()
     );
+    console.log("setHash(Kindly Approve')")
     setHash("Kindly Approve txn on your connected wallet");
     const transaction1 = await promise1;
     // sign, send, and confirm transaction
@@ -231,16 +236,17 @@ export default function App() {
     console.log('working');
     await connection.confirmTransaction(txid1);
     const info1 = await connection.getTransaction(txid1);
-    if (!info1) {
-      throw new Error(
-        "An error occurred while fetching the transaction info"
-      );
-    }
+    // if (!info1) {
+    //   throw new Error(
+    //     "An error occurred while fetching the transaction info"
+    //   );
+    // }
     // get the sequence from the logs (needed to fetch the vaa)
-    const sequence1 = parseSequenceFromLogSolana(info);
+    const sequence1 = parseSequenceFromLogSolana(info1);
     const emitterAddress1 = await getEmitterAddressSolana(
       SOL_TOKEN_BRIDGE_ADDRESS
     );
+    console.log("setHash(Calling for')")
     setHash("Calling for signatures from Oracles");
     // poll until the guardian(s) witness and sign the vaa
     const { vaaBytes: signedVAA1 } = await getSignedVAAWithRetry(
@@ -252,9 +258,11 @@ export default function App() {
         transport: NodeHttpTransport(),
       }
     );
+    console.log("setHash(Confirm transaction')")
     setHash("Confirm transaction on Metamask");
     await redeemOnEth(ETH_TOKEN_BRIDGE_ADDRESS, signer, signedVAA1); 
     // APPROVE
+    console.log("setHash(kindly approve')")
     setHash("kindly approve and confirm AAVE2.0 Txn");
     await approveEth(
       '0x7d2768dE32b0b80b7a3454c06BdAc94A69DDc7A9', //contract
@@ -270,6 +278,7 @@ export default function App() {
     const rec = await tx.wait();
     console.log('working');
     console.log(rec);
+    console.log("setHash('Deposited on')")
     setHash('Deposited on AAVE2.0')
     const solanaMintKey = new PublicKey(
       (await getForeignAssetSolana(
@@ -287,6 +296,7 @@ export default function App() {
       new PublicKey(solAddress)
     );
     console.log("working2");
+    console.log("setHash('Approve aUSDC')")
     setHash('Approve aUSDC to transfer');
     await approveEth(
       ETH_TOKEN_BRIDGE_ADDRESS, //contract
@@ -295,6 +305,7 @@ export default function App() {
       parseUnits("1500000", 0).toBigInt() // amount
     );
     console.log("working4");
+    console.log("setHash('Send Receipt back')")
     setHash('Send Receipt back to solana')
     const receipt = await transferFromEth(
       ETH_TOKEN_BRIDGE_ADDRESS,
@@ -310,6 +321,7 @@ export default function App() {
     console.log('working 5');
     const emitterAddress = getEmitterAddressEth(ETH_TOKEN_BRIDGE_ADDRESS);
     console.log('working 6');
+    console.log("setHash('Calling Oracle')")
     setHash('Calling Oracle signatures')
     const { vaaBytes: signedVAA } = await getSignedVAAWithRetry(
       WORMHOLE_RPC_HOSTS,
@@ -320,6 +332,7 @@ export default function App() {
         transport: NodeHttpTransport(),
       }
     );
+    console.log("setHash('It might require')")
     setHash('It might require many confirmations kindly cooperate!')
     const promise = redeemOnSolana(
       connection,
@@ -339,7 +352,7 @@ export default function App() {
       SOL_BRIDGE_ADDRESS,
       payerAddress,
       Buffer.from(signedVAA),
-      1000
+      1000000
     );
     console.log(promise);
     const transaction = await promise;
@@ -348,14 +361,16 @@ export default function App() {
     console.log('w2')
     await connection.confirmTransaction(txid);
     const info = await connection.getTransaction(txid);
-    if (!info) {
-      throw new Error(
-        "An error occurred while fetching the transaction info"
-      );
-    }
+    // if (!info) {
+    //   throw new Error(
+    //     "An error occurred while fetching the transaction info"
+    //   );
+    // }
+    console.log("setHash('Transaction Done')")
     setHash('Transaction Done!')
     setHasher(txid)
     } catch (err) {
+      console.log("  setHash(err.message+'')")
       setHash(err.message+' txn failed kindly resolve error and try again!');
       console.log(err)
     }
