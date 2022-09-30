@@ -18,7 +18,7 @@ function BridgeConfirm() {
         <SideBar />
         <div>
           <div className="main-head" style={{ justifyContent: "space-between" }}>
-            <p>1492 DEMO</p>
+            <p>xHack Demo</p>
           </div>
           <div className="my-card my-card-second">
             <p className="review">Transaction Details</p>

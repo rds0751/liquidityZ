@@ -79,7 +79,7 @@ export default function SideBar() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <Drawer
+      {/* <Drawer
         sx={{
           width: drawerWidth,
           flexShrink: 0,
@@ -200,7 +200,7 @@ export default function SideBar() {
             }
           </div>
         </div>
-      </Drawer>
+      </Drawer> */}
     </Box>
   );
 }
